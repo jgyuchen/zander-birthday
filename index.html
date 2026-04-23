@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Zander! 🎂</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* ===== SPLASH / HEADER ===== */
+        .header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 80%);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        .birthday-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: #ffd700;
+            text-shadow: 0 0 30px #ffd700, 0 0 60px rgba(255,215,0,0.4);
+            margin-bottom: 16px;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ffd700; }
+            to   { text-shadow: 0 0 40px #ffd700, 0 0 80px rgba(255,215,0,0.6); }
+        }
+        .name-label {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: #ff6b81;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            color: #aaa;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        .enter-btn {
+            padding: 16px 48px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff4757, #ff6b81);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 30px rgba(255,71,87,0.5);
+            position: relative;
+            letter-spacing: 1px;
+        }
+        .enter-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(255,71,87,0.7);
+        }
+        .enter-btn:active { transform: scale(0.97); }
+
+        /* Stars background */
+        .stars { position: absolute; width: 100%; height: 100%; overflow: hidden; }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--dur) ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 50px;
+            color: #ffd700;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        /* ===== 1. BASKETBALL CARDS ===== */
+        .basketball-section {
+            background: linear-gradient(180deg, #0f0e17 0%, #1a1035 100%);
+        }
+        .card-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        .card-wrapper {
+            width: 260px;
+            height: 380px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+        }
+        .card-wrapper:hover .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .card-front {
+            background: linear-gradient(135deg, #ff7900, #e55700);
+            box-shadow: 0 0 40px rgba(255,121,0,0.4);
+        }
+        .card-back {
+            background: linear-gradient(135deg, #2c2c54, #4a4e8a);
+            transform: rotateY(180deg);
+            box-shadow: 0 0 40px rgba(74,78,138,0.4);
+        }
+        .card-emoji { font-size: 4rem; margin-bottom: 16px; }
+        .card-player-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .card-stat {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+            margin-top: 10px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .card-badge {
+            margin-top: 16px;
+            padding: 6px 18px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        .card-flip-hint {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== 2. CSGO ===== */
+        .csgo-section {
+            background: linear-gradient(180deg, #0d0d0d 0%, #111827 100%);
+        }
+        .case-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        .case-box {
+            width: 280px;
+            height: 360px;
+            background: linear-gradient(145deg, #1c2938, #243447);
+            border: 2px solid #2980b9;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(41,128,185,0.3), inset 0 0 30px rgba(41,128,185,0.1);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .case-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+        .case-box:hover::before { transform: translateX(100%); }
+        .case-box:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 0 50px rgba(41,128,185,0.6);
+        }
+        .case-icon { font-size: 5rem; margin-bottom: 20px; }
+        .case-text { font-size: 1.2rem; color: #3498db; text-align: center; line-height: 1.8; font-weight: 600; }
+        .case-subtext { font-size: 0.85rem; color: #666; margin-top: 10px; }
+        #caseResult {
+            min-height: 80px;
+            font-size: 1.3rem;
+            color: #e74c3c;
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.6;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        #caseResult.revealed { color: #f39c12; text-shadow: 0 0 15px rgba(243,156,18,0.5); }
+
+        /* ===== 3. GOLF ===== */
+        .golf-section {
+            background: linear-gradient(180deg, #0d2018 0%, #1a3d2e 50%, #0d2018 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .golf-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 30%;
+            background: linear-gradient(0deg, rgba(39,174,96,0.15) 0%, transparent 100%);
+        }
+        .golf-card {
+            max-width: 480px;
+            width: 100%;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #1e6c45, #27ae60);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(39,174,96,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .golf-card::before {
+            content: '⛳';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.08;
+            top: -20px; right: -20px;
+        }
+        .golf-card h3 { font-size: 1.8rem; margin-bottom: 20px; color: #fff; }
+        .golf-card p { font-size: 1.1rem; line-height: 2; color: rgba(255,255,255,0.9); }
+        .golf-btn {
+            margin-top: 30px;
+            padding: 12px 36px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 700;
+        }
+        .golf-btn:hover { background: rgba(255,255,255,0.35); transform: scale(1.05); }
+        #holeInOne {
+            margin-top: 24px;
+            font-size: 2rem;
+            min-height: 60px;
+            transition: 0.3s;
+        }
+
+        /* ===== 4. FINAL MESSAGE ===== */
+        .final-section {
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 100%);
+            text-align: center;
+        }
+        .final-msg {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            line-height: 2.2;
+            max-width: 600px;
+            color: #ddd;
+        }
+        .final-msg strong { color: #ffd700; }
+        .signature {
+            margin-top: 40px;
+            font-size: 1.1rem;
+            color: #ff6b81;
+            font-style: italic;
+        }
+
+        /* ===== FIREWORKS ===== */
+        .firework-particle {
+            position: fixed;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fwParticle var(--dur, 1.2s) ease-out forwards;
+        }
+        @keyframes fwParticle {
+            0%   { transform: translate(0,0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        /* ===== HIDDEN ===== */
+        .content { display: none; }
+
+        /* ===== SCROLL TRANSITIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SPLASH PAGE -->
+    <div class="header" id="header">
+        <div class="stars" id="stars"></div>
+        <h1 class="birthday-title">🎂 Happy Birthday 🎂</h1>
+        <div class="name-label">Zander</div>
+        <p class="subtitle">A Special Gift, Built Just For You</p>
+        <button class="enter-btn" onclick="showContent()">🎁 Open Your Gift</button>
+    </div>
+
+    <!-- GIFT CONTENT -->
+    <div class="content" id="giftContent">
+
+        <!-- 🏀 BASKETBALL STAR CARDS -->
+        <div class="section basketball-section">
+            <h2 class="section-title fade-in">🏀 Zander's Star Cards</h2>
+            <p style="color:#aaa; margin-bottom:40px; font-size:0.95rem;" class="fade-in">Hover the cards to flip them ✨</p>
+            <div class="card-container fade-in">
+
+                <div class="card-wrapper">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-emoji">🏀</div>
+                            <div class="card-player-name">Stephen Curry</div>
+                            <div class="card-stat">3-Point King<br>Chef Curry Since 2009</div>
+                            <div class="card-badge">GOAT TIER: S+</div>
+                            <div class="card-flip-hint">HOVER TO FLIP</div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-emoji">🏆</div>
+                            <div class="card-player-name">Why Curry?</div>
+                            <div class="card-stat">"The guy who changed<br>the game forever.<br>Just like Zander<br>changes the vibe."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="card-inner">
+                        <div class="card-front" style="background: linear-gradient(135deg,#c0392b,#8e1a0f);">
+                            <div class="card-emoji">👑</div>
+                            <div class="card-player-name">LeBron James</div>
+                            <div class="card-stat">The King<br>40,000+ Career Points</div>
+                            <div class="card-badge">LEGENDARY</div>
+                            <div class="card-flip-hint">HOVER TO FLIP</div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-emoji">🔥</div>
+                            <div class="card-player-name">King Energy</div>
+                            <div class="card-stat">"Still going strong<br>like fine wine —<br>Zander energy<br>100%."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="card-inner">
+                        <div class="card-front" style="background: linear-gradient(135deg,#8e44ad,#5b2c8d);">
+                            <div class="card-emoji">⭐</div>
+                            <div class="card-player-name">Zander</div>
+                            <div class="card-stat">The Real MVP<br>Best Friend Edition</div>
+                            <div class="card-badge">ULTRA RARE</div>
+                            <div class="card-flip-hint">HOVER TO FLIP</div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-emoji">💎</div>
+                            <div class="card-player-name">Card Stats</div>
+                            <div class="card-stat">
+                                Loyalty: 10/10<br>
+                                Vibes: MAX<br>
+                                Friendship: ∞<br>
+                                Cool Factor: OFF CHARTS
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 🔫 CSGO BIRTHDAY CASE -->
+        <div class="section csgo-section">
+            <h2 class="section-title fade-in">🔫 CSGO Birthday Case</h2>
+            <div class="case-area fade-in">
+                <div class="case-box" onclick="openCase()" id="caseBox">
+                    <div class="case-icon">🎰</div>
+                    <p class="case-text">Birthday Limited Case<br>★ Tap to Unbox ★</p>
+                    <p class="case-subtext">[ ONE TIME ONLY ]</p>
+                </div>
+                <p id="caseResult"></p>
+            </div>
+        </div>
+
+        <!-- ⛳ GOLF WISHES -->
+        <div class="section golf-section">
+            <h2 class="section-title fade-in">⛳ Golf Course Blessings</h2>
+            <div class="golf-card fade-in">
+                <h3>🌿 Wishing You a Hole-In-One Year</h3>
+                <p>
+                    May every swing be perfect,<br>
+                    every putt land true,<br>
+                    every fairway in life be wide open — <br>
+                    especially at your age, Zander. 😄<br><br>
+                    Keep crushing it on the green.
+                </p>
+                <button class="golf-btn" onclick="holeInOne()">🏌️ Take Your Shot!</button>
+                <div id="holeInOne"></div>
+            </div>
+        </div>
+
+        <!-- 🎂 FINAL MESSAGE -->
+        <div class="section final-section">
+            <h2 class="section-title fade-in">🎂 Happy Birthday, Zander!</h2>
+            <p class="final-msg fade-in">
+                This whole website is a gift built <strong>just for you</strong>.<br>
+                From the basketball courts to the CSGO servers,<br>
+                from the golf greens to late-night gaming sessions —<br>
+                <strong>you deserve a legendary birthday.</strong><br><br>
+                May this year bring you more clutch wins,<br>
+                more birdies, and more joy than ever before.
+            </p>
+            <p class="signature fade-in">— With love, from your friend 🙏</p>
+        </div>
+
+    </div>
+
+    <script>
+        // ── Stars on splash ──────────────────────────────────────
+        (function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 120; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+                const size = Math.random() * 2.5 + 0.5;
+                s.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    top:${Math.random()*100}%; left:${Math.random()*100}%;
+                    --dur:${Math.random()*3+2}s;
+                    animation-delay:${Math.random()*4}s;
+                `;
+                container.appendChild(s);
+            }
+        })();
+
+        // ── Fireworks ──────────────────────────────────────────────
+        const COLORS = ['#ffd700','#ff4757','#ff6b81','#54a0ff','#5f27cd','#00d2d3','#ff9f43','#1dd1a1'];
+
+        function launchFireworks(count = 30) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight * 0.7;
+                    burst(x, y);
+                }, i * 60);
+            }
+        }
+
+        function burst(x, y) {
+            const num = 12 + Math.floor(Math.random() * 10);
+            for (let i = 0; i < num; i++) {
+                const p = document.createElement('div');
+                p.className = 'firework-particle';
+                const angle = (i / num) * 2 * Math.PI;
+                const dist = 60 + Math.random() * 80;
+                p.style.cssText = `
+                    left:${x}px; top:${y}px;
+                    background:${COLORS[Math.floor(Math.random()*COLORS.length)]};
+                    --tx:${Math.cos(angle)*dist}px;
+                    --ty:${Math.sin(angle)*dist}px;
+                    --dur:${0.8 + Math.random()*0.6}s;
+                `;
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 1500);
+            }
+        }
+
+        // ── Show gift content ─────────────────────────────────────
+        function showContent() {
+            document.getElementById('header').style.display = 'none';
+            document.getElementById('giftContent').style.display = 'block';
+            launchFireworks(40);
+            setTimeout(() => observeFadeIns(), 100);
+        }
+
+        // ── Scroll-triggered fade in ──────────────────────────────
+        function observeFadeIns() {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+        }
+
+        // ── CSGO Open Case ────────────────────────────────────────
+        let caseOpened = false;
+        const CASE_RESULTS = [
+            { rarity: '★ COVERT ★',     text: 'AK-47 | Birthday Blaze\n"For the clutch player Zander"',          color: '#e74c3c' },
+            { rarity: '★★ CONTRABAND ★★', text: 'AWP | Zander Legend Edition\n"One shot. One kill. One legend."',  color: '#f39c12' },
+            { rarity: '★ CLASSIFIED ★',  text: 'M4A4 | Best Friend Badge\n"Rare drop — 0.01% chance"',             color: '#8e44ad' },
+            { rarity: '★ RESTRICTED ★',  text: 'Desert Eagle | The Z-Special\n"Forged on late-night gaming sessions"', color: '#3498db' },
+        ];
+
+        function openCase() {
+            if (caseOpened) return;
+            caseOpened = true;
+            const box = document.getElementById('caseBox');
+            box.style.animation = 'none';
+            box.innerHTML = '<div class="case-icon" style="font-size:3rem;animation:glow 0.3s ease-in-out 6 alternate;">✨</div><p style="color:#ffd700;font-size:1.1rem;font-weight:700;">Opening...</p>';
+
+            const roll = CASE_RESULTS[Math.floor(Math.random() * CASE_RESULTS.length)];
+            setTimeout(() => {
+                const el = document.getElementById('caseResult');
+                el.className = 'revealed';
+                el.innerHTML = `<span style="color:#aaa;font-size:0.9rem;">${roll.rarity}</span><br>${roll.text.replace('\n','<br>')}`;
+                el.style.color = roll.color;
+                launchFireworks(20);
+                box.innerHTML = '<div class="case-icon">🎁</div><p class="case-text" style="color:#2ecc71;">Case Opened!</p>';
+            }, 1800);
+        }
+
+        // ── Golf hole-in-one ─────────────────────────────────────
+        function holeInOne() {
+            const el = document.getElementById('holeInOne');
+            el.innerHTML = '🏌️‍♂️💨⛳ HOLE IN ONE! 🎉';
+            el.style.animation = 'none';
+            el.offsetHeight; // reflow
+            el.style.animation = 'glow 1s ease-in-out 3 alternate';
+            launchFireworks(15);
+        }
+    </script>
+</body>
+</html>
